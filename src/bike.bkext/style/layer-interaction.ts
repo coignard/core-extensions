@@ -9,7 +9,7 @@ export function registerInteractionLayers(style: EditorStyle) {
       let values = computeValues(context)
       let selection = context.isKey
         ? colors.blockBackgroundSelected
-        : colors.text.mixed(colors.background, 0.863)
+        : colors.contentBackgroundSelectedUnemphasized
       row.decoration('selection', (background, layout) => {
         background.anchor.x = 0
         background.anchor.y = 0
@@ -18,8 +18,6 @@ export function registerInteractionLayers(style: EditorStyle) {
         background.width = layout.width.offset(layout.leadingContent.scale(-1))
         background.height = layout.text.bottom.minus(layout.top).offset(row.text.margin.bottom)
         background.color = selection
-        background.border.width = 1 * values.uiScale
-        background.border.color = selection.mixed(colors.text, 0.1)
         background.corners.radius = 3 * values.uiScale
         background.mergable = true
         background.transitions.color = false
@@ -32,7 +30,7 @@ export function registerInteractionLayers(style: EditorStyle) {
       let colors = context.theme.colors
       let selection = context.isKey
         ? colors.textBackgroundSelected
-        : colors.text.mixed(colors.background, 0.863)
+        : colors.contentBackgroundSelectedUnemphasized
 
       text.decoration('selection', (sel, layout) => {
         sel.zPosition = -2
@@ -41,8 +39,6 @@ export function registerInteractionLayers(style: EditorStyle) {
         sel.x = layout.leading
         sel.y = layout.top
         sel.color = selection
-        sel.border.width = 1 * values.uiScale
-        sel.border.color = selection.mixed(colors.text, 0.1)
         sel.corners.radius = 3 * values.uiScale
         sel.mergable = true
       })
