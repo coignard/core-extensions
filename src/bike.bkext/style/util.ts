@@ -130,6 +130,12 @@ export function computeValues(context: StyleContext): {
     }
   }
 
+  if (context.isFullWindow) {
+    let minHorizontalPadding = viewportContentInsets.top
+    geometry.viewportPadding.left = Math.max(geometry.viewportPadding.left, minHorizontalPadding)
+    geometry.viewportPadding.right = Math.max(geometry.viewportPadding.right, minHorizontalPadding)
+  }
+
   let uiScale = geometry.uiScale
   let handleWidth = Math.max(1, HANDLE_WIDTH_MULTIPLIER * uiScale)
   let handleHeight = Math.max(1, HANDLE_HEIGHT_MULTIPLIER * uiScale)
