@@ -72,13 +72,15 @@ export function computeValues(context: StyleContext): {
 
   let font = context.settings.font
   let viewportSize = context.viewportSize
+  let viewportContentInsets = context.viewportContentInsets
+  let visibleViewportHeight = viewportSize.height - viewportContentInsets.top - viewportContentInsets.bottom
   let typewriterMode = context.settings.typewriterMode
   let lineWidth = context.settings.lineWidth ?? Number.MAX_SAFE_INTEGER
   let geometry = computeGeometryForFont(font, context)
 
   if (lineWidth == 0 || lineWidth == Number.MAX_SAFE_INTEGER) {
     if (typewriterMode) {
-      geometry.viewportPadding.top = viewportSize.height * typewriterMode
+      geometry.viewportPadding.top = visibleViewportHeight * typewriterMode
     }
   } else {
     let inverseGolden = 1 / GOLDEN_RATIO
@@ -116,7 +118,7 @@ export function computeValues(context: StyleContext): {
     }
 
     if (typewriterMode) {
-      geometry.viewportPadding.top = viewportSize.height * typewriterMode
+      geometry.viewportPadding.top = visibleViewportHeight * typewriterMode
     } else {
       let lineHeight = geometry.fontAttributes.pointSize * context.settings.lineHeightMultiple
       for (const tier of VERTICAL_PADDING_TIERS) {
@@ -168,6 +170,8 @@ function computeGeometryForFont(
   fontAttributes: FontAttributes
 } {
   let viewportSize = context.viewportSize
+  let viewportContentInsets = context.viewportContentInsets
+  let visibleViewportHeight = viewportSize.height - viewportContentInsets.top - viewportContentInsets.bottom
   let fontAttributes = font.resolve(context)
   let pointSize = fontAttributes.pointSize
   let uiScale = pointSize / BASE_FONT_SIZE
@@ -182,7 +186,7 @@ function computeGeometryForFont(
   let viewportPadding = new Insets(
     VIEWPORT_PADDING_BASE * uiScale,
     VIEWPORT_PADDING_BASE * uiScale + indent,
-    viewportSize.height * BOTTOM_VIEWPORT_FRACTION,
+    visibleViewportHeight * BOTTOM_VIEWPORT_FRACTION,
     VIEWPORT_PADDING_BASE * uiScale,
   )
 
