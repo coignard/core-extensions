@@ -1,0 +1,183 @@
+describe("bike.screens", () => {
+    it("is a non-empty array", () => {
+        assert(Array.isArray(bike.screens), "screens should be an array")
+        assert(bike.screens.length > 0, "should have at least one screen")
+    })
+
+    it("entries have a stable id string", () => {
+        for (const s of bike.screens) {
+            assert(typeof s.id === "string", "screen.id should be a string")
+            assert(s.id.length > 0, "screen.id should not be empty")
+        }
+    })
+
+    it("entries have a localized name", () => {
+        for (const s of bike.screens) {
+            assert(typeof s.name === "string", "screen.name should be a string")
+        }
+    })
+
+    it("entries have a positive scale", () => {
+        for (const s of bike.screens) {
+            assert(typeof s.scale === "number", "screen.scale should be a number")
+            assert(s.scale > 0, "screen.scale should be > 0")
+        }
+    })
+
+    it("entries have a frame with positive size", () => {
+        for (const s of bike.screens) {
+            assert(typeof s.frame.x === "number")
+            assert(typeof s.frame.y === "number")
+            assert(typeof s.frame.width === "number")
+            assert(typeof s.frame.height === "number")
+            assert(s.frame.width > 0, "frame.width should be > 0")
+            assert(s.frame.height > 0, "frame.height should be > 0")
+        }
+    })
+
+    it("entries have a visibleFrame contained in frame", () => {
+        for (const s of bike.screens) {
+            assert(typeof s.visibleFrame.x === "number")
+            assert(typeof s.visibleFrame.y === "number")
+            assert(typeof s.visibleFrame.width === "number")
+            assert(typeof s.visibleFrame.height === "number")
+            assert(s.visibleFrame.width > 0, "visibleFrame.width should be > 0")
+            assert(s.visibleFrame.height > 0, "visibleFrame.height should be > 0")
+            assert(s.visibleFrame.width <= s.frame.width,
+                "visibleFrame.width should be <= frame.width")
+            assert(s.visibleFrame.height <= s.frame.height,
+                "visibleFrame.height should be <= frame.height")
+            assert(s.visibleFrame.x >= s.frame.x,
+                "visibleFrame.x should be >= frame.x")
+            assert(s.visibleFrame.y >= s.frame.y,
+                "visibleFrame.y should be >= frame.y")
+        }
+    })
+
+    it("primary screen has frame origin (0, 0)", () => {
+        // NSScreen.screens[0] is the screen whose origin is (0, 0).
+        assert.equal(bike.screens[0].frame.x, 0)
+        assert.equal(bike.screens[0].frame.y, 0)
+    })
+
+    it("ids are unique across screens", () => {
+        const ids = bike.screens.map(s => s.id)
+        assert.equal(new Set(ids).size, ids.length, "screen ids should be unique")
+    })
+})
+
+describe("bike.mainScreen", () => {
+    it("exists", () => {
+        assert(bike.mainScreen, "mainScreen should be defined")
+    })
+
+    it("matches one of bike.screens by id", () => {
+        const ids = bike.screens.map(s => s.id)
+        assert(ids.includes(bike.mainScreen.id),
+            "mainScreen.id should be present in bike.screens")
+    })
+
+    it("has the same shape as a screen entry", () => {
+        const m = bike.mainScreen
+        assert(typeof m.id === "string")
+        assert(typeof m.name === "string")
+        assert(typeof m.scale === "number")
+        assert(typeof m.frame.width === "number")
+        assert(typeof m.visibleFrame.width === "number")
+    })
+})
+
+describe("Window.screen", () => {
+    it("frontmost window reports a screen", () => {
+        const window = bike.frontmostWindow
+        assert(window, "Expected a frontmost window")
+        const s = window!.screen
+        assert(s, "frontmost window should be on a screen")
+        assert(typeof s!.id === "string")
+        assert(s!.frame.width > 0)
+    })
+
+    it("window.screen id matches one of bike.screens", () => {
+        const window = bike.frontmostWindow
+        assert(window, "Expected a frontmost window")
+        const s = window!.screen
+        assert(s, "window.screen should be defined")
+        const ids = bike.screens.map(x => x.id)
+        assert(ids.includes(s!.id), "window.screen.id should be in bike.screens")
+    })
+})
+
+describe("showPanel screen positioning", () => {
+    const domScript = `
+        var extensionExports = { activate: function(context) {
+            context.postMessage({ type: "ready" })
+        }}
+    `
+
+    it("accepts x and y options", async () => {
+        const v = bike.mainScreen.visibleFrame
+        const handle = await bike.showPanel({
+            script: domScript,
+            title: "Positioned Panel",
+            x: v.x + 50,
+            y: v.y + 50,
+            width: 200,
+            height: 150,
+        })
+        assert(handle, "Expected a handle from positioned showPanel")
+        await new Promise<any>((resolve) => {
+            handle.onmessage = (m: any) => resolve(m)
+        })
+        handle.dispose()
+    })
+
+    it("accepts a screen option", async () => {
+        const handle = await bike.showPanel({
+            script: domScript,
+            title: "Screened Panel",
+            screen: bike.mainScreen,
+            width: 200,
+            height: 150,
+        })
+        assert(handle, "Expected a handle from screen-targeted showPanel")
+        await new Promise<any>((resolve) => {
+            handle.onmessage = (m: any) => resolve(m)
+        })
+        handle.dispose()
+    })
+
+    it("accepts x, y, and screen together", async () => {
+        const v = bike.mainScreen.visibleFrame
+        const handle = await bike.showPanel({
+            script: domScript,
+            title: "Positioned + Screened Panel",
+            screen: bike.mainScreen,
+            x: v.x + 100,
+            y: v.y + 100,
+            width: 200,
+            height: 150,
+        })
+        assert(handle, "Expected a handle from x/y + screen showPanel")
+        await new Promise<any>((resolve) => {
+            handle.onmessage = (m: any) => resolve(m)
+        })
+        handle.dispose()
+    })
+
+    it("opens a panel covering the right two-thirds of mainScreen", async () => {
+        // Worked example from the screen API plan: 1/3 ⇄ 2/3 split.
+        const v = bike.mainScreen.visibleFrame
+        const handle = await bike.showPanel({
+            script: domScript,
+            title: "Right Two-Thirds",
+            x: v.x + v.width / 3,
+            y: v.y,
+            width: (v.width * 2) / 3,
+            height: v.height,
+        })
+        await new Promise<any>((resolve) => {
+            handle.onmessage = (m: any) => resolve(m)
+        })
+        handle.dispose()
+    })
+})
