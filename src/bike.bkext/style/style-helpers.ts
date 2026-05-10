@@ -38,7 +38,7 @@ export function dropLine(context: StyleContext, row: RowStyle, yPosition: (layou
   row.decoration('dropIndicator', (dropIndicator, layout) => {
     dropIndicator.anchor.x = 0
     dropIndicator.x = layout.leadingContent
-    dropIndicator.width = layout.width.offset(layout.leadingContent.scale(-1))
+    dropIndicator.width = layout.trailing.minus(layout.leadingContent)
     dropIndicator.y = yPosition(layout)
     dropIndicator.height = layout.fixed(Math.max(3 * values.uiScale, 2))
     dropIndicator.color = colors.accent

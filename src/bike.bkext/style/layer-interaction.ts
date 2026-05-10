@@ -15,7 +15,7 @@ export function registerInteractionLayers(style: EditorStyle) {
         background.anchor.y = 0
         background.x = layout.leadingContent
         background.y = layout.top
-        background.width = layout.width.offset(layout.leadingContent.scale(-1))
+        background.width = layout.trailing.minus(layout.leadingContent)
         background.height = layout.text.bottom.minus(layout.top).offset(row.text.margin.bottom)
         background.color = selection
         background.corners.radius = 3 * values.uiScale
