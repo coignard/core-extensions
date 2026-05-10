@@ -114,15 +114,12 @@ describe("showPanel screen positioning", () => {
         }}
     `
 
-    it("accepts x and y options", async () => {
+    it("accepts a frame option", async () => {
         const v = bike.mainScreen.visibleFrame
         const handle = await bike.showPanel({
             script: domScript,
             title: "Positioned Panel",
-            x: v.x + 50,
-            y: v.y + 50,
-            width: 200,
-            height: 150,
+            frame: { x: v.x + 50, y: v.y + 50, width: 200, height: 150 },
         })
         assert(handle, "Expected a handle from positioned showPanel")
         await new Promise<any>((resolve) => {
@@ -131,33 +128,16 @@ describe("showPanel screen positioning", () => {
         handle.dispose()
     })
 
-    it("accepts a screen option", async () => {
+    it("targets a specific screen via frame coordinates", async () => {
+        // To put a panel on a particular screen, pass an origin within
+        // that screen's frame — `screen` is no longer a separate option.
+        const v = bike.mainScreen.frame
         const handle = await bike.showPanel({
             script: domScript,
-            title: "Screened Panel",
-            screen: bike.mainScreen,
-            width: 200,
-            height: 150,
+            title: "Screen-Targeted Panel",
+            frame: { x: v.x + 20, y: v.y + 20, width: 200, height: 150 },
         })
         assert(handle, "Expected a handle from screen-targeted showPanel")
-        await new Promise<any>((resolve) => {
-            handle.onmessage = (m: any) => resolve(m)
-        })
-        handle.dispose()
-    })
-
-    it("accepts x, y, and screen together", async () => {
-        const v = bike.mainScreen.visibleFrame
-        const handle = await bike.showPanel({
-            script: domScript,
-            title: "Positioned + Screened Panel",
-            screen: bike.mainScreen,
-            x: v.x + 100,
-            y: v.y + 100,
-            width: 200,
-            height: 150,
-        })
-        assert(handle, "Expected a handle from x/y + screen showPanel")
         await new Promise<any>((resolve) => {
             handle.onmessage = (m: any) => resolve(m)
         })
@@ -170,14 +150,68 @@ describe("showPanel screen positioning", () => {
         const handle = await bike.showPanel({
             script: domScript,
             title: "Right Two-Thirds",
-            x: v.x + v.width / 3,
-            y: v.y,
-            width: (v.width * 2) / 3,
-            height: v.height,
+            frame: {
+                x: v.x + v.width / 3,
+                y: v.y,
+                width: (v.width * 2) / 3,
+                height: v.height,
+            },
         })
         await new Promise<any>((resolve) => {
             handle.onmessage = (m: any) => resolve(m)
         })
         handle.dispose()
+    })
+})
+
+describe("Window.frame", () => {
+    it("reads a Rect with positive size", () => {
+        const window = bike.frontmostWindow
+        assert(window, "Expected a frontmost window")
+        const f = window!.frame
+        assert(typeof f.x === "number", "frame.x should be a number")
+        assert(typeof f.y === "number", "frame.y should be a number")
+        assert(typeof f.width === "number", "frame.width should be a number")
+        assert(typeof f.height === "number", "frame.height should be a number")
+        assert(f.width > 0, "frame.width should be > 0")
+        assert(f.height > 0, "frame.height should be > 0")
+    })
+
+    it("round-trips a write", () => {
+        const window = bike.frontmostWindow
+        assert(window, "Expected a frontmost window")
+        const original = window!.frame
+        try {
+            const next = {
+                x: original.x + 20,
+                y: original.y + 20,
+                width: 600,
+                height: 400,
+            }
+            window!.frame = next
+            const got = window!.frame
+            const tol = 1 // AppKit may round to integer points
+            assert(Math.abs(got.x - next.x) <= tol, `frame.x ${got.x} ~= ${next.x}`)
+            assert(Math.abs(got.y - next.y) <= tol, `frame.y ${got.y} ~= ${next.y}`)
+            assert(Math.abs(got.width - next.width) <= tol,
+                `frame.width ${got.width} ~= ${next.width}`)
+            assert(Math.abs(got.height - next.height) <= tol,
+                `frame.height ${got.height} ~= ${next.height}`)
+        } finally {
+            window!.frame = original
+        }
+    })
+
+    it("ignores a malformed Rect (no missing-key crash)", () => {
+        const window = bike.frontmostWindow
+        assert(window, "Expected a frontmost window")
+        const before = window!.frame
+        // Cast through any so the bad shape compiles.
+        ;(window as any).frame = { x: 0, y: 0 }
+        const after = window!.frame
+        assert.equal(after.x, before.x, "frame.x should be unchanged")
+        assert.equal(after.y, before.y, "frame.y should be unchanged")
+        assert.equal(after.width, before.width, "frame.width should be unchanged")
+        assert.equal(after.height, before.height, "frame.height should be unchanged")
     })
 })

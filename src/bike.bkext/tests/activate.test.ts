@@ -83,7 +83,7 @@ describe("PanelHandle.activate", () => {
             }}
         `
 
-        const handle = await bike.showPanel({ script: domScript, title: "Activate Test", width: 200, height: 150 })
+        const handle = await bike.showPanel({ script: domScript, title: "Activate Test", frame: { x: 0, y: 0, width: 200, height: 150 } })
 
         await new Promise<any>((resolve) => {
             handle.onmessage = (message: any) => resolve(message)
@@ -103,7 +103,7 @@ describe("PanelHandle.activate", () => {
             }}
         `
 
-        const handle = await bike.showPanel({ script: domScript, role: 'utility', width: 200, height: 150 })
+        const handle = await bike.showPanel({ script: domScript, role: 'utility', frame: { x: 0, y: 0, width: 200, height: 150 } })
 
         await new Promise<any>((resolve) => {
             handle.onmessage = (message: any) => resolve(message)
