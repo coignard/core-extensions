@@ -2,7 +2,7 @@
   "metadata": {
     "version": "1.0.0",
     "author": "Hog Bay Software",
-    "appearance": "light"
+    "appearance": "dark"
   },
   "colors": {
     "base03": "#002b36",
@@ -22,20 +22,20 @@
     "cyan": "#2aa198",
     "green": "#859900",
 
-    "text": "$base00",
-    "secondaryText": "$base1",
+    "text": "$base0",
+    "secondaryText": "$base01",
     "accent": "$blue",
-    "background": "$base3",
+    "background": "$base03",
     "caret": "$accent",
     "caretLine": "rgb(from $text r g b / 6%)",
     "caretMessage": "$secondaryText",
     "textBackgroundSelected": "rgb(from $accent r g b / 25%)",
     "blockBackgroundSelected": "rgb(from $accent r g b / 25%)",
-    "findMatch": "color-mix(in oklch, $yellow 40%, $background)",
-    "findMatchCurrent": "oklch(from $yellow calc(l - 0.1) c h)",
+    "findMatch": "color-mix(in oklch, $yellow 30%, $background)",
+    "findMatchCurrent": "oklch(from $yellow calc(l + 0.1) c h)",
     "handle": "$text",
-    "handleUnloaded": "color-mix(in oklch, $handle 30%, $background)",
-    "guideLine": "color-mix(in oklch, $handleUnloaded 65%, $background)",
+    "handleUnloaded": "color-mix(in oklch, $handle 15%, $background)",
+    "guideLine": "color-mix(in oklch, $handleUnloaded 5%, $background)",
     "focusArrow": "$handleUnloaded",
     "spelling": "$red",
     "grammar": "$green",
@@ -44,16 +44,21 @@
     "sidebarSeparators": "$divider",
     "editorBarSeparators": "$panel",
 
-    "panel": "$base2",
-    "divider": "rgb(from $base01 r g b / 25%)"
+    "panel": "$base02",
+    "divider": "rgb(from $base01 r g b / 40%)"
   },
   "materials": {
     "window": "$background",
     "editor": "$background",
+    "titlebar": {
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
+    },
     "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
     }
   },
   "rows": {
@@ -90,7 +95,7 @@
   },
   "runs": {
     "strong": {
-      "color": "$base01",
+      "color": "$base1",
       "fontWeight": "semibold"
     },
     "emphasis": {

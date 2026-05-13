@@ -5,32 +5,30 @@
     "appearance": "dark"
   },
   "colors": {
-    "base03": "#002b36",
-    "base02": "#073642",
-    "base01": "#586e75",
-    "base00": "#657b83",
-    "base0": "#839496",
-    "base1": "#93a1a1",
-    "base2": "#eee8d5",
-    "base3": "#fdf6e3",
-    "yellow": "#b58900",
-    "orange": "#cb4b16",
-    "red": "#dc322f",
-    "magenta": "#d33682",
-    "violet": "#6c71c4",
-    "blue": "#268bd2",
-    "cyan": "#2aa198",
-    "green": "#859900",
+    "bg": "#011627",
+    "foreground": "#d6deeb",
+    "lineHighlight": "#0e293f",
+    "selection": "#1d3b53",
+    "comment": "#637777",
+    "purple": "#c792ea",
+    "pink": "#ff5874",
+    "cyan": "#7fdbca",
+    "yellow": "#ecc48d",
+    "blue": "#82aaff",
+    "green": "#addb67",
+    "orange": "#f78c6c",
+    "gold": "#ffcb8b",
+    "red": "#ef5350",
 
-    "text": "$base0",
-    "secondaryText": "$base01",
+    "text": "$foreground",
+    "secondaryText": "$comment",
     "accent": "$blue",
-    "background": "$base03",
+    "background": "$bg",
     "caret": "$accent",
-    "caretLine": "rgb(from $text r g b / 6%)",
+    "caretLine": "rgb(from $lineHighlight r g b / 50%)",
     "caretMessage": "$secondaryText",
-    "textBackgroundSelected": "rgb(from $accent r g b / 25%)",
-    "blockBackgroundSelected": "rgb(from $accent r g b / 25%)",
+    "textBackgroundSelected": "$selection",
+    "blockBackgroundSelected": "$selection",
     "findMatch": "color-mix(in oklch, $yellow 30%, $background)",
     "findMatchCurrent": "oklch(from $yellow calc(l + 0.1) c h)",
     "handle": "$text",
@@ -39,21 +37,26 @@
     "focusArrow": "$handleUnloaded",
     "spelling": "$red",
     "grammar": "$green",
-    "replacement": "$violet",
+    "replacement": "$purple",
     "titlebarSeparator": "$divider",
     "sidebarSeparators": "$divider",
     "editorBarSeparators": "$panel",
 
-    "panel": "$base02",
-    "divider": "rgb(from $base01 r g b / 40%)"
+    "panel": "$selection",
+    "divider": "rgb(from $comment r g b / 40%)"
   },
   "materials": {
     "window": "$background",
     "editor": "$background",
+    "titlebar": {
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
+    },
     "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
     }
   },
   "rows": {
@@ -61,7 +64,7 @@
       "color": "$text"
     },
     "heading": {
-      "color": "$orange",
+      "color": "$gold",
       "fontWeight": "semibold"
     },
     "note": {
@@ -90,7 +93,6 @@
   },
   "runs": {
     "strong": {
-      "color": "$base1",
       "fontWeight": "semibold"
     },
     "emphasis": {
@@ -103,7 +105,7 @@
       }
     },
     "code": {
-      "color": "$magenta",
+      "color": "$purple",
       "fontTraits": ["monospace"]
     },
     "mark": {

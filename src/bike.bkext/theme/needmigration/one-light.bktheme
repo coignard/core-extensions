@@ -2,62 +2,62 @@
   "metadata": {
     "version": "1.0.0",
     "author": "Hog Bay Software",
-    "appearance": "dark"
+    "appearance": "light"
   },
   "colors": {
-    "bg": "#1a1b26",
-    "bgDark": "#16161e",
-    "bgHighlight": "#292e42",
-    "bgVisual": "#283457",
-    "terminalBlack": "#414868",
-    "comment": "#565f89",
-    "fgDark": "#a9b1d6",
-    "fg": "#c0caf5",
-    "blue": "#7aa2f7",
-    "cyan": "#7dcfff",
-    "blue1": "#2ac3de",
-    "blue5": "#89ddff",
-    "magenta": "#bb9af7",
-    "purple": "#9d7cd8",
-    "magenta2": "#ff007c",
-    "orange": "#ff9e64",
-    "yellow": "#e0af68",
-    "green": "#9ece6a",
-    "green1": "#73daca",
-    "red": "#f7768e",
+    "bg": "#fafafa",
+    "panelBg": "#f0f0f1",
+    "selection": "#e5e5e6",
+    "mono1": "#383a42",
+    "mono2": "#696c77",
+    "mono3": "#a0a1a7",
+    "cyan": "#0184bc",
+    "blue": "#4078f2",
+    "purple": "#a626a4",
+    "green": "#50a14f",
+    "red": "#e45649",
+    "redDeep": "#ca1243",
+    "orange": "#986801",
+    "gold": "#c18401",
+    "syntaxAccent": "#526fff",
 
-    "text": "$fg",
-    "secondaryText": "$comment",
+    "text": "$mono1",
+    "secondaryText": "$mono3",
     "accent": "$blue",
     "background": "$bg",
     "caret": "$accent",
-    "caretLine": "rgb(from $bgHighlight r g b / 50%)",
+    "caretLine": "rgb(from $syntaxAccent r g b / 6%)",
     "caretMessage": "$secondaryText",
-    "textBackgroundSelected": "$bgVisual",
-    "blockBackgroundSelected": "$bgVisual",
-    "findMatch": "color-mix(in oklch, $yellow 30%, $background)",
-    "findMatchCurrent": "oklch(from $yellow calc(l + 0.1) c h)",
+    "textBackgroundSelected": "$selection",
+    "blockBackgroundSelected": "$selection",
+    "findMatch": "color-mix(in oklch, $gold 40%, $background)",
+    "findMatchCurrent": "oklch(from $gold calc(l - 0.1) c h)",
     "handle": "$text",
-    "handleUnloaded": "color-mix(in oklch, $handle 15%, $background)",
-    "guideLine": "color-mix(in oklch, $handleUnloaded 5%, $background)",
+    "handleUnloaded": "color-mix(in oklch, $handle 30%, $background)",
+    "guideLine": "color-mix(in oklch, $handleUnloaded 65%, $background)",
     "focusArrow": "$handleUnloaded",
     "spelling": "$red",
     "grammar": "$green",
-    "replacement": "$magenta",
+    "replacement": "$purple",
     "titlebarSeparator": "$divider",
     "sidebarSeparators": "$divider",
     "editorBarSeparators": "$panel",
 
-    "panel": "$bgDark",
-    "divider": "rgb(from $comment r g b / 40%)"
+    "panel": "$panelBg",
+    "divider": "rgb(from $mono3 r g b / 40%)"
   },
   "materials": {
     "window": "$background",
     "editor": "$background",
+    "titlebar": {
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
+    },
     "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
     }
   },
   "rows": {
@@ -106,11 +106,11 @@
       }
     },
     "code": {
-      "color": "$magenta",
+      "color": "$purple",
       "fontTraits": ["monospace"]
     },
     "mark": {
-      "backgroundColor": "rgb(from $yellow r g b / 20%)"
+      "backgroundColor": "rgb(from $gold r g b / 25%)"
     },
     "link": {
       "color": "$accent",

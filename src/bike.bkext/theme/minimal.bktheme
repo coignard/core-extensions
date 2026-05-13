@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "author": "Jesse Grosjean"
+  },
+  "colors": {
+    "themeSecondarDivider": "rgb(from separator r g b / calc(alpha * 0.5))"
+  },
+  "materials": {
+    "window": {},
+    "titlebar": {
+      "fill": {
+        "type": "system",
+        "style": "titlebar",
+        "followsActive": true
+      },
+      "borders": {
+        "bottom": "separator"
+      }
+    },
+    "sidebar": {
+      "fill": {
+        "type": "system",
+        "style": "header"
+      }
+    },
+    "editorPane": {
+      "fill": "textBackground",
+      "borders": {
+        "leading": "separator",
+        "trailing": "separator"
+      }
+    },
+    "editorToolbar": {
+      "fill": {
+        "type": "system",
+        "style": "header"
+      },
+      "borders": {
+        "bottom": "$themeSecondarDivider"
+      }
+    },
+    "editor": {},
+    "editorPanel": {
+      "fill": {
+        "type": "system",
+        "style": "header"
+      },
+      "borders": {
+        "top": "$themeSecondarDivider"
+      }
+    },
+    "editorStatusBar": {
+      "fill": {
+        "type": "system",
+        "style": "header"
+      },
+      "borders": {
+        "top": "$themeSecondarDivider"
+      }
+    },
+    "sidebar": {}
+  }
+}

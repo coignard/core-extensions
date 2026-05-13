@@ -5,58 +5,60 @@
     "appearance": "light"
   },
   "colors": {
-    "bg": "#fcfcfc",
-    "fg": "#5c6166",
-    "ui": "#8a9199",
-    "ayuAccent": "#ffaa33",
-    "tag": "#55b4d4",
-    "func": "#f2ae49",
-    "entity": "#399ee6",
-    "string": "#86b300",
-    "regexp": "#4cbf99",
-    "markup": "#f07171",
-    "keyword": "#fa8d3e",
-    "special": "#e6ba7e",
-    "comment": "#abadb1",
-    "constant": "#a37acc",
-    "operator": "#ed9366",
-    "error": "#e65050",
-    "vcsAdded": "#6cbf43",
-    "vcsModified": "#478acc",
-    "vcsRemoved": "#ff7383",
+    "base03": "#002b36",
+    "base02": "#073642",
+    "base01": "#586e75",
+    "base00": "#657b83",
+    "base0": "#839496",
+    "base1": "#93a1a1",
+    "base2": "#eee8d5",
+    "base3": "#fdf6e3",
+    "yellow": "#b58900",
+    "orange": "#cb4b16",
+    "red": "#dc322f",
+    "magenta": "#d33682",
+    "violet": "#6c71c4",
+    "blue": "#268bd2",
+    "cyan": "#2aa198",
+    "green": "#859900",
 
-    "text": "$fg",
-    "secondaryText": "$ui",
-    "accent": "$ayuAccent",
-    "background": "$bg",
+    "text": "$base00",
+    "secondaryText": "$base1",
+    "accent": "$blue",
+    "background": "$base3",
     "caret": "$accent",
-    "caretLine": "rgb(from $ui r g b / 10%)",
+    "caretLine": "rgb(from $text r g b / 6%)",
     "caretMessage": "$secondaryText",
-    "textBackgroundSelected": "rgb(from $entity r g b / 15%)",
-    "blockBackgroundSelected": "rgb(from $entity r g b / 15%)",
-    "findMatch": "color-mix(in oklch, $func 40%, $background)",
-    "findMatchCurrent": "oklch(from $func calc(l - 0.1) c h)",
+    "textBackgroundSelected": "rgb(from $accent r g b / 25%)",
+    "blockBackgroundSelected": "rgb(from $accent r g b / 25%)",
+    "findMatch": "color-mix(in oklch, $yellow 40%, $background)",
+    "findMatchCurrent": "oklch(from $yellow calc(l - 0.1) c h)",
     "handle": "$text",
     "handleUnloaded": "color-mix(in oklch, $handle 30%, $background)",
     "guideLine": "color-mix(in oklch, $handleUnloaded 65%, $background)",
     "focusArrow": "$handleUnloaded",
-    "spelling": "$error",
-    "grammar": "$string",
-    "replacement": "$constant",
+    "spelling": "$red",
+    "grammar": "$green",
+    "replacement": "$violet",
     "titlebarSeparator": "$divider",
     "sidebarSeparators": "$divider",
     "editorBarSeparators": "$panel",
 
-    "panel": "color-mix(in oklch, $bg 96%, $fg)",
-    "divider": "rgb(from $ui r g b / 25%)"
+    "panel": "$base2",
+    "divider": "rgb(from $base01 r g b / 25%)"
   },
   "materials": {
     "window": "$background",
     "editor": "$background",
+    "titlebar": {
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $base02)"
+    },
     "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $base02)"
     }
   },
   "rows": {
@@ -64,18 +66,18 @@
       "color": "$text"
     },
     "heading": {
-      "color": "$keyword",
+      "color": "$orange",
       "fontWeight": "semibold"
     },
     "note": {
       "color": "$secondaryText"
     },
     "blockquote": {
-      "color": "$tag",
+      "color": "$cyan",
       "fontTraits": ["italic"]
     },
     "codeblock": {
-      "color": "$string",
+      "color": "$green",
       "fontTraits": ["monospace"]
     },
     "task": {
@@ -93,6 +95,7 @@
   },
   "runs": {
     "strong": {
+      "color": "$base01",
       "fontWeight": "semibold"
     },
     "emphasis": {
@@ -105,11 +108,11 @@
       }
     },
     "code": {
-      "color": "$constant",
+      "color": "$magenta",
       "fontTraits": ["monospace"]
     },
     "mark": {
-      "backgroundColor": "rgb(from $func r g b / 30%)"
+      "backgroundColor": "rgb(from $yellow r g b / 20%)"
     },
     "link": {
       "color": "$accent",

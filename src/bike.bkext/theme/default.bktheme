@@ -3,11 +3,61 @@
     "version": "1.0.0",
     "author": "Jesse Grosjean"
   },
+  "colors": {
+    // Enabled light mode #F5F7F9
+    // Disable light mode #E9EBEE
+
+    "themePanel": "light-dark(#F5F7F9, #383A3B)",
+    "themeInactivePanel": "light-dark(#E9EBEE, #2D3234)",
+    "themeDivider": "light-dark(separator, rgb(from separator r g b / calc(alpha * 1.5)))",
+    "themeSecondaryDivider": "rgb(from $themeDivider r g b / calc(alpha * 0.5))",
+    "themeContentDivider": "light-dark(separator, black)"
+  },
   "materials": {
-    "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+    "window": {
+      "fill": {
+        "type": "active",
+        "active": "$themePanel",
+        "inactive": "$themeInactivePanel"
+      }
+    },
+    "titlebar": {},
+    "sidebar": {},
+    "editorPane": {
+      "fill": "textBackground",
+      "cornerRadius": {
+        "topLeading": 8
+      },
+      "borders": {
+        "leading": "$themeContentDivider",
+        "top": "$themeContentDivider",
+        "trailing": "$themeDivider"
+      }
+    },
+    "editor": {},
+    "editorToolbar": {
+      "fill": "textBackground",
+      "borders": {
+        "bottom": "$themeSecondaryDivider"
+      }
+    },
+    "editorPanel": {
+      "fill": "textBackground",
+      "borders": {
+        "top": "$themeSecondaryDivider"
+      }
+    },
+    "editorStatusBar": {
+      "fill": "textBackground",
+      "borders": {
+        "top": "$themeSecondaryDivider"
+      }
+    },
+    "inspector": {
+      "fill": "textBackground",
+      "borders": {
+        "top": "$themeContentDivider"
+      }
     }
   }
 }

@@ -5,40 +5,41 @@
     "appearance": "dark"
   },
   "colors": {
-    // 1. Source palette — (ayu dark)
-    "ayuBg": "#0b0e14",
-    "ayuFg": "#bfbdb6",
-    "ayuUi": "#565b66",
-    "ayuAccent": "#e6b450",
-    "ayuTag": "#39bae6",
-    "ayuFunc": "#ffb454",
-    "ayuEntity": "#59c2ff",
-    "ayuString": "#aad94c",
-    "ayuRegexp": "#95e6cb",
-    "ayuMarkup": "#f07178",
-    "ayuKeyword": "#ff8f40",
-    "ayuSpecial": "#e6b673",
-    "ayuComment": "#646b73",
-    "ayuConstant": "#d2a6ff",
-    "ayuOperator": "#f29668",
-    "ayuError": "#d95757",
-    "ayuVcsAdded": "#7fd962",
-    "ayuVcsModified": "#73b8ff",
-    "ayuVcsRemoved": "#f26d78",
+    // 1. Source palette — (tokyo night)
+    "tnBg": "#1a1b26",
+    "tnBgDark": "#16161e",
+    "tnBgHighlight": "#292e42",
+    "tnBgVisual": "#283457",
+    "tnTerminalBlack": "#414868",
+    "tnComment": "#565f89",
+    "tnFgDark": "#a9b1d6",
+    "tnFg": "#c0caf5",
+    "tnBlue": "#7aa2f7",
+    "tnCyan": "#7dcfff",
+    "tnBlue1": "#2ac3de",
+    "tnBlue5": "#89ddff",
+    "tnMagenta": "#bb9af7",
+    "tnPurple": "#9d7cd8",
+    "tnMagenta2": "#ff007c",
+    "tnOrange": "#ff9e64",
+    "tnYellow": "#e0af68",
+    "tnGreen": "#9ece6a",
+    "tnGreen1": "#73daca",
+    "tnRed": "#f7768e",
 
     // 2. Common set of theme named values, everything else should be defined in
     //    terms of these
-    "themeText": "$ayuFg",
-    "themeAccent": "$ayuAccent",
-    "themeBackground": "$ayuBg",
-    "themeHeading": "$ayuKeyword",
+    "themeText": "$tnFg",
+    "themeAccent": "$tnBlue",
+    "themeBackground": "$tnBg",
+    "themeHeading": "$tnOrange",
     "themeDivider": "$themePanel",
-    "themeSelectionBackground": "rgb(from $ayuEntity r g b / 50%)",
-    "themeLink": "$ayuAccent",
-    "themeMark": "$ayuFunc",
-    "themeError": "$ayuError",
-    "themeGrammar": "$ayuString",
-    "themeReplacement": "$ayuConstant",
+    "themeSelectionBackground": "rgb(from $tnCyan r g b / 50%)",
+    "themeLink": "$tnBlue",
+    "themeMark": "$tnYellow",
+    "themeError": "$tnRed",
+    "themeGrammar": "$tnGreen",
+    "themeReplacement": "$tnMagenta",
     "themeMarkBackground": "rgb(from $themeMark r g b / 30%)",
     "themePanel": "color-mix(in oklch, $themeBackground 80%, $themeText)",
     "themePanelBottom": "oklch(from $themePanel calc(l - 0.05) c h)",
@@ -62,65 +63,30 @@
     "focusArrow": "$handleUnloaded",
     "grammar": "$themeGrammar",
     "spelling": "$themeError",
-    "replacement": "$themeReplacement"
+    "replacement": "$themeReplacement",
+    "titlebarSeparator": "$themeDivider",
+    "sidebarSeparators": "$themeDivider",
+    "editorBarSeparators": "color-mix(in oklch, $themeDivider 75%, $themeBackground)"
   },
   "materials": {
-    "window": {
-      "fill": "$themeBackground"
-    },
+    "window": "$themeBackground",
+    "editor": "$themeBackground",
     "titlebar": {
-      "fill": {
-        "type": "active",
-        "active": "$themePanel",
-        "inactive": "$themeInactivePanel"
-      }
+      "type": "active",
+      "active": "$themePanel",
+      "inactive": "$themeInactivePanel"
     },
     "sidebar": {
-      "fill": {
-        "type": "active",
-        "active": {
-          "type": "linear",
-          "angle": 0,
-          "stops": [
-            { "color": "$themePanel", "position": 0 },
-            { "color": "$themePanelBottom", "position": 1 }
-          ]
-        },
-        "inactive": "$themeInactivePanel"
+      "type": "active",
+      "active": {
+        "type": "linear",
+        "angle": 0,
+        "stops": [
+          { "color": "$themePanel", "position": 0 },
+          { "color": "$themePanelBottom", "position": 1 }
+        ]
       },
-      "borders": {
-        "trailing": "$themeDivider"
-      }
-    },
-    "editor": {
-      "fill": "$themeBackground",
-      "borders": {
-        "top": "$themeDivider"
-      }
-    },
-    "editorToolbar": {
-      "fill": "$themeBackground",
-      "borders": {
-        "top": "$themeDivider"
-      }
-    },
-    "editorPanel": {
-      "fill": "$themeBackground",
-      "borders": {
-        "top": "$themeDivider"
-      }
-    },
-    "editorStatusBar": {
-      "fill": "$themeBackground",
-      "borders": {
-        "top": "$themeDivider"
-      }
-    },
-    "inspector": {
-      "fill": "$themeInactivePanel",
-      "borders": {
-        "leading": "$themeDivider"
-      }
+      "inactive": "$themeInactivePanel"
     }
   },
   "rows": {

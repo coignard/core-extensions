@@ -5,50 +5,63 @@
     "appearance": "light"
   },
   "colors": {
-    "bg": "#fbfbfb",
-    "foreground": "#403f53",
-    "lineHighlight": "#f0f0f0",
-    "selection": "#e0e0e0",
-    "comment": "#989fb1",
-    "purple": "#994cc3",
-    "blue": "#4876d6",
-    "magenta": "#aa0982",
-    "teal": "#0c969b",
-    "gold": "#daaa01",
-    "red": "#bc5454",
+    "bg": "#fcfcfc",
+    "fg": "#5c6166",
+    "ui": "#8a9199",
+    "ayuAccent": "#ffaa33",
+    "tag": "#55b4d4",
+    "func": "#f2ae49",
+    "entity": "#399ee6",
+    "string": "#86b300",
+    "regexp": "#4cbf99",
+    "markup": "#f07171",
+    "keyword": "#fa8d3e",
+    "special": "#e6ba7e",
+    "comment": "#abadb1",
+    "constant": "#a37acc",
+    "operator": "#ed9366",
+    "error": "#e65050",
+    "vcsAdded": "#6cbf43",
+    "vcsModified": "#478acc",
+    "vcsRemoved": "#ff7383",
 
-    "text": "$foreground",
-    "secondaryText": "$comment",
-    "accent": "$blue",
+    "text": "$fg",
+    "secondaryText": "$ui",
+    "accent": "$ayuAccent",
     "background": "$bg",
     "caret": "$accent",
-    "caretLine": "rgb(from $lineHighlight r g b / 50%)",
+    "caretLine": "rgb(from $ui r g b / 10%)",
     "caretMessage": "$secondaryText",
-    "textBackgroundSelected": "$selection",
-    "blockBackgroundSelected": "$selection",
-    "findMatch": "color-mix(in oklch, $gold 40%, $background)",
-    "findMatchCurrent": "oklch(from $gold calc(l - 0.1) c h)",
+    "textBackgroundSelected": "rgb(from $entity r g b / 15%)",
+    "blockBackgroundSelected": "rgb(from $entity r g b / 15%)",
+    "findMatch": "color-mix(in oklch, $func 40%, $background)",
+    "findMatchCurrent": "oklch(from $func calc(l - 0.1) c h)",
     "handle": "$text",
     "handleUnloaded": "color-mix(in oklch, $handle 30%, $background)",
     "guideLine": "color-mix(in oklch, $handleUnloaded 65%, $background)",
     "focusArrow": "$handleUnloaded",
-    "spelling": "$red",
-    "grammar": "$teal",
-    "replacement": "$purple",
+    "spelling": "$error",
+    "grammar": "$string",
+    "replacement": "$constant",
     "titlebarSeparator": "$divider",
     "sidebarSeparators": "$divider",
     "editorBarSeparators": "$panel",
 
-    "panel": "$lineHighlight",
-    "divider": "rgb(from $comment r g b / 25%)"
+    "panel": "color-mix(in oklch, $bg 96%, $fg)",
+    "divider": "rgb(from $ui r g b / 25%)"
   },
   "materials": {
     "window": "$background",
     "editor": "$background",
+    "titlebar": {
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
+    },
     "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
     }
   },
   "rows": {
@@ -56,18 +69,18 @@
       "color": "$text"
     },
     "heading": {
-      "color": "$gold",
+      "color": "$keyword",
       "fontWeight": "semibold"
     },
     "note": {
       "color": "$secondaryText"
     },
     "blockquote": {
-      "color": "$teal",
+      "color": "$tag",
       "fontTraits": ["italic"]
     },
     "codeblock": {
-      "color": "$purple",
+      "color": "$string",
       "fontTraits": ["monospace"]
     },
     "task": {
@@ -97,11 +110,11 @@
       }
     },
     "code": {
-      "color": "$magenta",
+      "color": "$constant",
       "fontTraits": ["monospace"]
     },
     "mark": {
-      "backgroundColor": "rgb(from $gold r g b / 25%)"
+      "backgroundColor": "rgb(from $func r g b / 30%)"
     },
     "link": {
       "color": "$accent",

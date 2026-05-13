@@ -5,32 +5,33 @@
     "appearance": "dark"
   },
   "colors": {
-    "bg": "#011627",
-    "foreground": "#d6deeb",
-    "lineHighlight": "#0e293f",
-    "selection": "#1d3b53",
-    "comment": "#637777",
-    "purple": "#c792ea",
-    "pink": "#ff5874",
-    "cyan": "#7fdbca",
-    "yellow": "#ecc48d",
-    "blue": "#82aaff",
-    "green": "#addb67",
-    "orange": "#f78c6c",
-    "gold": "#ffcb8b",
-    "red": "#ef5350",
+    "bg": "#282c34",
+    "panelBg": "#21252b",
+    "selection": "#3e4451",
+    "mono1": "#abb2bf",
+    "mono2": "#828997",
+    "mono3": "#5c6370",
+    "cyan": "#56b6c2",
+    "blue": "#61afef",
+    "purple": "#c678dd",
+    "green": "#98c379",
+    "red": "#e06c75",
+    "redDeep": "#be5046",
+    "orange": "#d19a66",
+    "gold": "#e5c07b",
+    "syntaxAccent": "#528bff",
 
-    "text": "$foreground",
-    "secondaryText": "$comment",
+    "text": "$mono1",
+    "secondaryText": "$mono3",
     "accent": "$blue",
     "background": "$bg",
     "caret": "$accent",
-    "caretLine": "rgb(from $lineHighlight r g b / 50%)",
+    "caretLine": "rgb(from $syntaxAccent r g b / 6%)",
     "caretMessage": "$secondaryText",
     "textBackgroundSelected": "$selection",
     "blockBackgroundSelected": "$selection",
-    "findMatch": "color-mix(in oklch, $yellow 30%, $background)",
-    "findMatchCurrent": "oklch(from $yellow calc(l + 0.1) c h)",
+    "findMatch": "color-mix(in oklch, $gold 30%, $background)",
+    "findMatchCurrent": "oklch(from $gold calc(l + 0.1) c h)",
     "handle": "$text",
     "handleUnloaded": "color-mix(in oklch, $handle 15%, $background)",
     "guideLine": "color-mix(in oklch, $handleUnloaded 5%, $background)",
@@ -42,16 +43,21 @@
     "sidebarSeparators": "$divider",
     "editorBarSeparators": "$panel",
 
-    "panel": "$selection",
-    "divider": "rgb(from $comment r g b / 40%)"
+    "panel": "$panelBg",
+    "divider": "rgb(from $mono3 r g b / 40%)"
   },
   "materials": {
     "window": "$background",
     "editor": "$background",
+    "titlebar": {
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
+    },
     "sidebar": {
-      "type": "system",
-      "style": "titlebar",
-      "followsActive": true
+      "type": "active",
+      "active": "$panel",
+      "inactive": "color-mix(in oklch, $panel 90%, $text)"
     }
   },
   "rows": {
@@ -59,7 +65,7 @@
       "color": "$text"
     },
     "heading": {
-      "color": "$gold",
+      "color": "$orange",
       "fontWeight": "semibold"
     },
     "note": {
@@ -104,7 +110,7 @@
       "fontTraits": ["monospace"]
     },
     "mark": {
-      "backgroundColor": "rgb(from $yellow r g b / 20%)"
+      "backgroundColor": "rgb(from $gold r g b / 20%)"
     },
     "link": {
       "color": "$accent",
