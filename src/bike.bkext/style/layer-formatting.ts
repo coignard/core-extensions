@@ -10,8 +10,6 @@ export function registerFormattingLayers(style: EditorStyle) {
 
     row(`.heading`, (context, row) => {
       context.theme.rows.heading.apply(row.text)
-      let index = context.consecutivePath?.[context.consecutivePath.length - 1] ?? 0
-      listMark(context, row, Image.fromText(new Text(index + '.', row.text.font, row.text.color)))
     })
 
     row(`.blockquote`, (context, row) => {
